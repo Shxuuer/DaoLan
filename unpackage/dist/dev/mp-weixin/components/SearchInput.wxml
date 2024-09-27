@@ -1,0 +1,1 @@
+<view class="main"><image src="{{a}}" class="search"></image><input type="text" placeholder="{{b}}" class="input" bindchange="{{c}}"/></view>

@@ -1,0 +1,17 @@
+
+.map.data-v-b9e52463 {
+	width: 100vw;
+	height: 650rpx;
+}
+.ctrl.data-v-b9e52463 {
+	position: absolute;
+	right: 40rpx;
+	top: 40rpx;
+	padding: 20rpx;
+	z-index: 2;
+	
+	background: #3182CE;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	color: #FCFCFC;
+}

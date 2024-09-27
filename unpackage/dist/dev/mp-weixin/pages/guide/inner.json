@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "top-bar": "../../components/TopBar",
+    "select-group": "../../components/SelectGroup",
+    "nearby-position": "../../components/NearbyPosition"
+  }
+}

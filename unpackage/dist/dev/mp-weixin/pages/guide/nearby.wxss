@@ -1,0 +1,31 @@
+
+.nearby-text.data-v-48e115b9 {
+	position: relative;
+	left: 45rpx;
+	top: 45rpx;
+	width: -webkit-fit-content;
+	width: fit-content;
+
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 19px;
+	display: flex;
+	align-items: center;
+	letter-spacing: 2px;
+
+	color: #333333;
+}
+.map.data-v-48e115b9 {
+	width: 100vw;
+	height: 650rpx;
+	top: 280rpx;
+}
+.near-by.data-v-48e115b9 {
+	position: relative;
+	width: 100vw;
+	min-height: 60vh;
+	background-color: #f0f0f0;
+	border-radius: 32rpx 32rpx 0 0;
+}

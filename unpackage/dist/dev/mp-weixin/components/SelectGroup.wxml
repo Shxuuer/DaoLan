@@ -1,0 +1,1 @@
+<view class="type-select data-v-3f7cdf4c"><block wx:for="{{a}}" wx:for-item="cell" wx:key="e"><view class="select-cell data-v-3f7cdf4c" bindtap="{{cell.b}}" style="{{'background-color:' + cell.c + ';' + ('color:' + cell.d)}}">{{cell.a}}</view></block></view>

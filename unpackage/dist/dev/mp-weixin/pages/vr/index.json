@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "VR",
+  "usingComponents": {
+    "bottom-bar": "../../components/BottomBar",
+    "search-input": "../../components/SearchInput"
+  }
+}

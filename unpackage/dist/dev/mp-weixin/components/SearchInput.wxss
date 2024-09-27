@@ -1,0 +1,31 @@
+
+.main {
+	box-sizing: border-box;
+	position: relative;
+	height: 100rpx;
+	background: #333333;
+	border-radius: 25px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.search {
+	position: relative;
+	width: 40rpx;
+	height: 40rpx;
+	margin: 0 30rpx;
+}
+.input {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	font-size: 30rpx;
+	color: #888888;
+	margin-right: 25rpx;
+	
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	line-height: 32rpx;
+	align-items: center;
+}

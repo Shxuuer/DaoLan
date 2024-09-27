@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "top-bar": "../../components/TopBar",
+    "nearby-position": "../../components/NearbyPosition",
+    "my-map": "../../components/MyMap"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "导览",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "top-bar": "../../components/TopBar",
+    "nearby-position": "../../components/NearbyPosition",
+    "select-group": "../../components/SelectGroup",
+    "my-map": "../../components/MyMap"
+  }
+}

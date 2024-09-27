@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "导览",
+  "usingComponents": {
+    "bottom-bar": "../../components/BottomBar"
+  }
+}

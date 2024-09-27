@@ -1,0 +1,30 @@
+{
+  "pages": [
+    "pages/guide/index",
+    "pages/guide/inner",
+    "pages/guide/innerDetail",
+    "pages/guide/nearby",
+    "pages/guide/detail",
+    "pages/vr/index",
+    "pages/my/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于获取周围导览目标"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation",
+    "startLocationUpdate",
+    "onLocationChange"
+  ],
+  "plugins": {},
+  "usingComponents": {}
+}

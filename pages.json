@@ -1,0 +1,60 @@
+{
+	"pages": [
+		{
+			"path" : "pages/guide/index",
+			"style" : 
+			{
+				"navigationBarTitleText" : "导览"
+			}
+		},
+		{
+			"path": "pages/guide/inner",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/guide/innerDetail",
+			"style" : 
+			{
+				"navigationBarTitleText" : "导览",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/guide/nearby",
+			"style" : 
+			{
+				"navigationBarTitleText" : "导览",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/guide/detail",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path" : "pages/vr/index",
+			"style" : 
+			{
+				"navigationBarTitleText" : "VR"
+			}
+		},
+		{
+			"path": "pages/my/index",
+			"style" : 
+			{
+				"navigationBarTitleText" : "我的"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {}
+}

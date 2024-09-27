@@ -1,0 +1,80 @@
+
+.bottom.data-v-03fd682b {
+		position: fixed;
+		width: 100vw;
+		height: 80px;
+		left: 0px;
+		bottom: 0px;
+}
+.main.data-v-03fd682b {
+		position: relative;
+		width: 100vw;
+		height: 80px;
+		left: 0px;
+		top: 0px;
+		background: #FFFFFF;
+		box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.05);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+}
+.daolan.data-v-03fd682b {
+		position: relative;
+		width: 125px;
+		height: 80px;
+		left: 0px;
+		top: 0px;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+}
+.daolan-pic.data-v-03fd682b {
+		position: relative;
+		width: 29px;
+		height: 29px;
+}
+.daolan-text.data-v-03fd682b {
+		position: relative;
+		top: 3px;
+		font-family: 'Source Code Pro';
+		font-style: normal;
+		font-weight: 600;
+		font-size: 15px;
+		line-height: 19px;
+		display: flex;
+		align-items: center;
+		text-align: center;
+		color: #888888;
+}
+.vr.data-v-03fd682b {
+		position: relative;
+		width: 125px;
+		height: 89px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		top: -12px;
+}
+.vr-pic.data-v-03fd682b {
+		position: relative;
+		width: 61px;
+		height: 61px;
+}
+.vr-text.data-v-03fd682b {
+		/* 实景 */
+		
+		position: relative;
+		
+		font-family: 'Source Code Pro';
+		font-style: normal;
+		font-weight: 600;
+		font-size: 15px;
+		line-height: 19px;
+		display: flex;
+		align-items: center;
+		text-align: center;
+		
+		color: #888888;
+}
+
