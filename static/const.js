@@ -1,3 +1,3 @@
 export default {
-	baseURL: 'https://dev-shahe-tour.molith.ink/'
+	baseURL: 'https://dev-shahe-tour.molith.ink'
 }

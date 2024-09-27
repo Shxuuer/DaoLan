@@ -6,14 +6,7 @@ export default {
 	data() {
 		return {
 			_const,
-			schools: [{
-				ID: '123',
-				Title: '北京邮电大学',
-				Description: '这是北邮，这是北邮，这是北邮，这是北邮，这是北邮，这是北邮，这是北邮，这是北邮',
-				Resource: {
-					CoverImages: ['https://ts1.cn.mm.bing.net/th/id/R-C.d99db076401aecf04e4477010084fa67?rik=a49Hry%2bbPSjBWg&riu=http%3a%2f%2fwww.jdxzz.com%2fuploads%2fallimg%2f190719%2f8-1ZG9140J9.jpg&ehk=0AFrRzTQ3jFtqXOcGX3cCGmCCgQgwFaZFwxN65tirG4%3d&risl=&pid=ImgRaw&r=0'],
-				}
-			}]
+			schools: []
 		}
 	},
 	components: {
@@ -28,14 +21,16 @@ export default {
 	},
 	onLoad: function() {
 	    wx.hideHomeButton();  //隐藏home/返回主页按钮
-		// uni.request({
-		//     url: _const.baseURL + 'api/miniapp/home',
-		//     data: {},
-		//     success: (res) => {
-		//         console.log(res.data);
-		//         this.schools = res.data.Regions
-		//     }
-		// });
+		uni.request({
+		    url: _const.baseURL + '/api/miniapp/home',
+		    data: {},
+		    success: (res) => {
+		        this.schools = res.data.Regions
+		    },
+			fail(res) {
+		    	console.log(res)
+		    }
+		});
 	}
 }
 </script>
@@ -52,7 +47,7 @@ export default {
 					<template v-for="cell, index in schools" :key="index">
 						<view class="school" @click="handleClick(cell.ID, cell.Title)">
 							<view class="school-pic">
-								<image class="school-image" :src="cell.Resource.CoverImages[0]"></image>
+								<image class="school-image" :src="_const.baseURL + cell.Resource.CoverImages[0]"></image>
 							</view>
 							<view class="school-text">
 								<view class="school-name">

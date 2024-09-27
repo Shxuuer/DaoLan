@@ -3,7 +3,7 @@
 		<template v-for="(item,index) in nearby_position" :key="index">
 			<view class="item" @click="goToDetail(item.Title, item.ID)">
 				<view class="pic">
-					<image :src="item.Resource.CoverImages[0]" class="pic-img"></image>
+					<image :src="_const.baseURL + item.Resource.CoverImages[0]" class="pic-img"></image>
 				</view>
 				<view class="info">
 					<view class="name">{{item.Title}}</view>
@@ -71,8 +71,8 @@ export default {
 	width: 14px;
 }
 .btns {
+	width: 30%;
 	gap: 30rpx;
-	width: 550rpx;
 	height: 100%;
 	position: relative;
 	display: flex;
@@ -103,6 +103,7 @@ export default {
 	overflow: hidden;
 	margin-left: 20rpx;
 	margin-right: 20rpx;
+	width: 60%;
 }
 .name {
 	font-family: 'Roboto';

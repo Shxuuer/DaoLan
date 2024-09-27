@@ -28,6 +28,17 @@ export default {
 	onLoad: function(option) {
 		this.name = option.name
 		this.id = option.id
+		uni.request({
+			url: _const.baseURL + '/api/miniapp/outdoor',
+			method: 'POST',
+		    data: {},
+		    success: (res) => {
+				this.nearbys = res.data.Places
+		    },
+			fail(res) {
+		    	console.log(res)
+		    }
+		});
 	},
 	data() {
 		return {
@@ -37,14 +48,7 @@ export default {
 			latitude: '',
 			longitude: '',
 			_const,
-			nearbys: [{
-				ID: '1',
-				Title: '图书馆',
-				Resource: {
-					CoverImages: ['https://ts1.cn.mm.bing.net/th/id/R-C.211e37dababa0991421d4de9ec64fab0?rik=6oBHvKLFxHnuNA&riu=http%3a%2f%2f5b0988e595225.cdn.sohucs.com%2fimages%2f20180531%2f3e700b36b785457088295f21f583adc7.jpeg&ehk=DrCzUw5Vlr6HWP%2bSVWCncq6VuufnDytKScUeqhlrxiY%3d&risl=&pid=ImgRaw&r=0'],
-				},
-				Description: '这是北邮的图书馆'
-			}]
+			nearbys: []
 		}
 	},
 	methods: {

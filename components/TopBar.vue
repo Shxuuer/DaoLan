@@ -3,17 +3,25 @@ export default {
 	name: 'TopBar',
 	props: ['name', 'buttonName'],
 	emits: ['buttonActive'],
+	data() {
+		return {
+			icon: {}
+		}
+	},
 	methods: {
 		handleBack() {
 			uni.navigateBack(1)
 		}
+	},
+	beforeMount() {
+		this.icon = wx.getMenuButtonBoundingClientRect()
 	}
 }
 </script>
 
 <template>
-	<view class="head">
-		<view class="main">
+	<view class="head" :style="{height: icon.bottom + 5 + 'px'}">
+		<view class="main" :style="{top: icon.top - 1 + 'px'}">
 			<view class="name">
 				<text>{{name}}</text>
 			</view>
@@ -31,7 +39,6 @@ export default {
 .head {
 	position: relative;
 	width: 100vw;
-	height: 150rpx;
 	background: #F0F0F0;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 	border-radius: 0px 0px 25px 25px;
@@ -39,7 +46,6 @@ export default {
 .main {
 	position: relative;
 	display: flex;
-	top: 70rpx;
 	align-items: center;
 }
 .back-img {
