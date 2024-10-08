@@ -21,6 +21,7 @@ const _sfc_main = {
   },
   onLoad: function() {
     common_vendor.wx$1.hideHomeButton();
+    console.log(static_const._const);
     common_vendor.index.request({
       url: static_const._const.baseURL + "/api/miniapp/home",
       data: {},
@@ -41,7 +42,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
     a: common_vendor.f($data.schools, (cell, index, i0) => {
       return {
-        a: $data._const.baseURL + cell.Resource.CoverImages[0],
+        a: $data._const.baseURL + cell.Resource.CoverImages[cell.Resource.CoverImages.length - 1],
         b: common_vendor.t(cell.Title),
         c: common_vendor.t(cell.Description),
         d: common_vendor.o(($event) => $options.handleClick(cell.ID, cell.Title), index),

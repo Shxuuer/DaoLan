@@ -1,1 +1,1 @@
-<view style="position:relative" class="map data-v-b9e52463"><view class="ctrl data-v-b9e52463" bindtap="{{a}}">刷新</view><map class="map data-v-b9e52463" id="map" longitude="{{b}}" latitude="{{c}}" scale="{{d}}" show-location="true" markers="{{e}}"></map></view>
+<view style="position:relative" class="map data-v-b9e52463"><view class="ctrl data-v-b9e52463" bindtap="{{a}}">刷新</view><map class="map data-v-b9e52463" id="map" longitude="{{b}}" latitude="{{c}}" scale="{{d}}" show-location="true" markers="{{e}}" bindupdated="{{f}}"></map></view>

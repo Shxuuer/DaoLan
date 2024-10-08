@@ -6,7 +6,7 @@
 		</view>
 		<!-- 地图 -->
 		<view class="map" style="z-index: 0;position: fixed;">
-			<MyMap v-model:longitude="longitude" v-model:latitude="latitude"></MyMap>
+			<MyMap :L_title="L_title" :L_latitude="L_latitude" :L_longitude="L_longitude"></MyMap>
 		</view>
 		<!-- 附近地点 -->
 		<view class="near-by" style="z-index: 0;top: 890rpx;">
@@ -34,6 +34,10 @@ export default {
 		    data: {},
 		    success: (res) => {
 				this.nearbys = res.data.Places
+				this.L_title = res.data.Region.Title
+				const temp = res.data.Region.Circle.split(',')
+				this.L_latitude = Number(temp[0])
+				this.L_longitude = Number(temp[1])
 		    },
 			fail(res) {
 		    	console.log(res)
@@ -45,34 +49,18 @@ export default {
 			name: '',
 			id: '',
 			types: ['休闲区','娱乐区','学习区','学习区','学习区','学习区'],
-			latitude: '',
-			longitude: '',
 			_const,
-			nearbys: []
+			nearbys: [],
+			L_title: '',
+			L_latitude: '',
+			L_longitude: ''
 		}
 	},
 	methods: {
 	},
 	watch: {
-		// longitude(newl, oldl) {
-		// 	if (newl === "") return
-		// 	uni.request({
-		// 		method: 'POST',
-		// 		url: _const.baseURL + 'api/miniapp/outdoor',
-		// 		data: {
-		// 			"Acc": 10,
-		// 			"Beacons": [
-		// 				"1:2:3"
-		// 			],
-		// 			"Lng": this.longitude,
-		// 			"Lat": this.latitude
-		// 		},
-		// 		success: (res) => {
-		// 			this.nearbys = res.data.Places
-		// 		}
-		// 	});
-		// }
-	}
+	},
+	
 }
 </script>
 

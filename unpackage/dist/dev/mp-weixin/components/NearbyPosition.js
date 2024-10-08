@@ -45,7 +45,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
     a: common_vendor.f($props.nearby_position, (item, index, i0) => {
       return common_vendor.e({
-        a: $data._const.baseURL + item.Resource.CoverImages[0],
+        a: $data._const.baseURL + item.Resource.CoverImages[item.Resource.CoverImages.length - 1],
         b: common_vendor.t(item.Title),
         c: common_vendor.t(item.Description)
       }, !$props.isInner ? {

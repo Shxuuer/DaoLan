@@ -13,7 +13,10 @@ const _sfc_main = {
       id: "",
       _const: static_const._const,
       place: {},
-      nearbys: []
+      nearbys: [],
+      L_title: "",
+      L_latitude: "",
+      L_longitude: ""
     };
   },
   onLoad: function(option) {
@@ -26,7 +29,10 @@ const _sfc_main = {
       success: (res) => {
         this.place = res.data.Place;
         this.nearbys = res.data.Nearby;
-        console.log(res.data);
+        this.L_title = res.data.Place.Title;
+        const temp = res.data.Place.Location.split(",");
+        this.L_latitude = Number(temp[0]);
+        this.L_longitude = Number(temp[1]);
       }
     });
   },
@@ -49,7 +55,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     b: $data.place.Resource
   }, $data.place.Resource ? common_vendor.e({
-    c: $data._const.baseURL + $data.place.Resource.CoverImages[0],
+    c: $data._const.baseURL + $data.place.Resource.CoverImages[$data.place.Resource.CoverImages.length - 1],
     d: $data.selectedID === 0 ? "#dfdfdf" : "#ffffff",
     e: common_vendor.o(($event) => $options.changeSelected(0)),
     f: $data.selectedID === 1 ? "#dfdfdf" : "#ffffff",
@@ -63,14 +69,20 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     m: common_vendor.t($data.place.Description)
   } : {}, {
     n: $data.selectedID === 1
-  }, $data.selectedID === 1 ? {} : {}, {
-    o: $data.selectedID === 2
+  }, $data.selectedID === 1 ? {
+    o: common_vendor.p({
+      L_title: $data.L_title,
+      L_latitude: $data.L_latitude,
+      L_longitude: $data.L_longitude
+    })
+  } : {}, {
+    p: $data.selectedID === 2
   }, $data.selectedID === 2 ? {
-    p: common_vendor.p({
+    q: common_vendor.p({
       nearby_position: $data.nearbys
     })
   } : {}, {
-    q: $data.selectedID === 3
+    r: $data.selectedID === 3
   }, $data.selectedID === 3 ? {} : {}) : {});
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-a46a4f2b"]]);

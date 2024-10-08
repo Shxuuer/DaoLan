@@ -2,7 +2,7 @@
 	<TopBar :name="place.Title" style="position: fixed; z-index: 1;top: 0;"></TopBar>
 	<view style="position: relative;" v-if="place.Resource">
 		<view style="display: flex;flex-direction: column;align-items: center;position: fixed;top: 200rpx;z-index: -1;width: 100vw;">
-			<image class="image" :src="_const.baseURL + place.Resource.CoverImages[0]"></image>
+			<image class="image" :src="_const.baseURL + place.Resource.CoverImages[place.Resource.CoverImages.length - 1]"></image>
 		</view>
 		<view class="main">
 			<view class="select-bar">
@@ -18,7 +18,7 @@
 					</view>
 				</template>
 				<template v-if="selectedID === 1" style="position: relative;width: 100%;">
-					<MyMap/>
+					<MyMap :L_title="L_title" :L_latitude="L_latitude" :L_longitude="L_longitude"/>
 				</template>
 				<view v-if="selectedID === 2" style="position: relative;width: 100%;">
 					<NearbyPosition :nearby_position="nearbys"></NearbyPosition>
@@ -45,7 +45,10 @@ export default {
 			id: "",
 			_const,
 			place: {},
-			nearbys: []
+			nearbys: [],
+			L_title: '',
+			L_latitude: '',
+			L_longitude: ''
 		}
 	},
 	onLoad: function(option) {
@@ -58,7 +61,11 @@ export default {
 			success: (res) => {
 				this.place = res.data.Place
 				this.nearbys = res.data.Nearby
-				console.log(res.data)
+				
+				this.L_title = res.data.Place.Title
+				const temp = res.data.Place.Location.split(',')
+				this.L_latitude = Number(temp[0])
+				this.L_longitude = Number(temp[1])
 			}
 		});
 	},

@@ -3,7 +3,7 @@
 		<template v-for="(item,index) in nearby_position" :key="index">
 			<view class="item" @click="goToDetail(item.Title, item.ID)">
 				<view class="pic">
-					<image :src="_const.baseURL + item.Resource.CoverImages[0]" class="pic-img"></image>
+					<image :src="_const.baseURL + item.Resource.CoverImages[item.Resource.CoverImages.length - 1]" class="pic-img"></image>
 				</view>
 				<view class="info">
 					<view class="name">{{item.Title}}</view>

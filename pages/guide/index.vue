@@ -21,6 +21,7 @@ export default {
 	},
 	onLoad: function() {
 	    wx.hideHomeButton();  //隐藏home/返回主页按钮
+		console.log(_const)
 		uni.request({
 		    url: _const.baseURL + '/api/miniapp/home',
 		    data: {},
@@ -47,7 +48,7 @@ export default {
 					<template v-for="cell, index in schools" :key="index">
 						<view class="school" @click="handleClick(cell.ID, cell.Title)">
 							<view class="school-pic">
-								<image class="school-image" :src="_const.baseURL + cell.Resource.CoverImages[0]"></image>
+								<image class="school-image" :src="_const.baseURL + cell.Resource.CoverImages[cell.Resource.CoverImages.length-1]"></image>
 							</view>
 							<view class="school-text">
 								<view class="school-name">
@@ -95,7 +96,6 @@ export default {
 	flex: none;
 	flex-grow: 0;
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	padding: 0 30rpx;
 	gap: 15rpx;
@@ -103,12 +103,14 @@ export default {
 
 .school-pic {
 	position: relative;
+	height: 190rpx;
+	width: 190rpx;
 }
 
 .school-image {
 	position: relative;
-	height: 220rpx;
-	width: 264rpx;
+	height: 190rpx;
+	width: 190rpx;
 	border-radius: 8px;
 }
 .school-text {

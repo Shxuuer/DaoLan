@@ -16,6 +16,10 @@ const _sfc_main = {
       data: {},
       success: (res) => {
         this.nearbys = res.data.Places;
+        this.L_title = res.data.Region.Title;
+        const temp = res.data.Region.Circle.split(",");
+        this.L_latitude = Number(temp[0]);
+        this.L_longitude = Number(temp[1]);
       },
       fail(res) {
         console.log(res);
@@ -27,33 +31,15 @@ const _sfc_main = {
       name: "",
       id: "",
       types: ["休闲区", "娱乐区", "学习区", "学习区", "学习区", "学习区"],
-      latitude: "",
-      longitude: "",
       _const: static_const._const,
-      nearbys: []
+      nearbys: [],
+      L_title: "",
+      L_latitude: "",
+      L_longitude: ""
     };
   },
   methods: {},
-  watch: {
-    // longitude(newl, oldl) {
-    // 	if (newl === "") return
-    // 	uni.request({
-    // 		method: 'POST',
-    // 		url: _const.baseURL + 'api/miniapp/outdoor',
-    // 		data: {
-    // 			"Acc": 10,
-    // 			"Beacons": [
-    // 				"1:2:3"
-    // 			],
-    // 			"Lng": this.longitude,
-    // 			"Lat": this.latitude
-    // 		},
-    // 		success: (res) => {
-    // 			this.nearbys = res.data.Places
-    // 		}
-    // 	});
-    // }
-  }
+  watch: {}
 };
 if (!Array) {
   const _component_TopBar = common_vendor.resolveComponent("TopBar");
@@ -70,13 +56,12 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     b: common_vendor.p({
       types: $data.types
     }),
-    c: common_vendor.o(($event) => $data.longitude = $event),
-    d: common_vendor.o(($event) => $data.latitude = $event),
-    e: common_vendor.p({
-      longitude: $data.longitude,
-      latitude: $data.latitude
+    c: common_vendor.p({
+      L_title: $data.L_title,
+      L_latitude: $data.L_latitude,
+      L_longitude: $data.L_longitude
     }),
-    f: common_vendor.p({
+    d: common_vendor.p({
       nearby_position: $data.nearbys
     })
   };

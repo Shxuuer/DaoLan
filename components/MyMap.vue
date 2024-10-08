@@ -2,7 +2,7 @@
 	<view style="position: relative;" class="map">
 		<view class="ctrl" @click="refresh">刷新</view>
 		<map class="map" id="map" :longitude="longitude" :latitude="latitude"
-		 :scale="scale" show-location="true" :markers="markers">
+		 :scale="scale" show-location="true" :markers="markers" @updated="update">
 		</map>
 	</view>
 </template>
@@ -11,32 +11,52 @@
 
 export default {
 	name: 'MyMap',
-	props: ['latitude', 'longitude'],
+	props: ['L_latitude', 'L_longitude', 'L_title'],
 	emits: ['update:latitude', 'update:longitude'],
 	data () {
 		return { 
 			scale: 13, 
 			markers: [],
-			getLocationTimer: null
+			getLocationTimer: null,
+			latitude: '',
+			longitude: ''
 		}
 	},
 	methods: {
 		refresh() {
 			const map = uni.createMapContext("map", this);
-			map.moveToLocation({
-				longitude: this.longitude,
-				latitude: this.latitude
-			})
+			if (this.L_latitude & this.L_longitude)
+				map.moveToLocation({
+					longitude: this.L_longitude,
+					latitude: this.L_latitude
+				})
+			else
+				map.moveToLocation({
+					longitude: this.longitude,
+					latitude: this.latitude
+				})
+		},
+		update() {
+			if (this.markers.length === 0 && this.L_latitude !== "")
+				this.markers.push({
+					id: 1,
+					latitude: this.L_latitude,
+					longitude: this.L_longitude,
+					title: this.L_title,
+					width: 30,
+					height: 45
+				}) 
+			this.refresh()
 		}
 	},
-	created() {
+	beforeMount() {
 		uni.startLocationUpdate({})
 		const that = this
 		uni.onLocationChange(function (res) {
 			that.$emit('update:latitude', res.latitude)
 			that.$emit('update:longitude', res.longitude)
 		});
-	}
+	},
 }
 </script>
 
