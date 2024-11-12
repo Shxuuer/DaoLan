@@ -20,7 +20,7 @@ export default {
 </script>
 
 <template>
-	<view class="head" :style="{height: icon.bottom + 5 + 'px'}">
+	<view class="head" :style="{height: icon.bottom + 20 + 'px'}">
 		<view class="main" :style="{top: icon.top - 1 + 'px'}">
 			<view class="name">
 				<text>{{name}}</text>

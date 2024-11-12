@@ -12,9 +12,9 @@
 		<view class="near-by" style="z-index: 0;top: 800rpx;">
 			<view style="position: relative;align-items: center;">
 				<view class="nearby-text">附近地点</view>
-				<view class="back-to">回到室外</view>
+				<view class="back-to" @click="handleBack">回到室外</view>
 			</view>
-			<NearbyPosition :nearby_position="nearby_position" style="top: 80rpx; position: relative;" :isInner="true"></NearbyPosition>
+			<NearbyPosition :nearby_position="nearbys" style="top: 80rpx; position: relative;" :isInner="true"></NearbyPosition>
 		</view>
 	</view>
 </template>
@@ -23,40 +23,39 @@
 import TopBar from '../../components/TopBar.vue'
 import SelectGroup from '../../components/SelectGroup.vue'
 import NearbyPosition from '../../components/NearbyPosition.vue'
+import _const from '../../static/const'
 
 export default {
 	name: 'inner',
 	components: {TopBar, SelectGroup, NearbyPosition},
+	beforeMount() {
+		uni.request({
+			url: _const.baseURL + '/api/miniapp/outdoor',
+			method: 'POST',
+		    data: {},
+		    success: (res) => {
+				this.nearbys = res.data.Places
+		    },
+			fail(res) {
+		    	console.log(res)
+		    }
+		});
+	},
 	data() {
 		return {
 			name: '',
 			types: ['1F', '2F', '3F', '4F', '5F'],
-			nearby_position: [
-				{
-					pic: 'https://th.bing.com/th/id/R.dbdc398dbbbf6f9bd71055e8bd532cd8?rik=6hjTjhOaYy%2fF7w&riu=http%3a%2f%2fedu.cnr.cn%2feduzt%2fyddx%2fyddxxyyy%2f20170527%2fW020170527533291504115.jpg&ehk=1ZuMM1%2bGR7kccHjroOZvTzEaBPNYMd%2f3PqfOxcpuw4k%3d&risl=&pid=ImgRaw&r=0',
-					name: '图书馆',
-					detail: '北京邮电大学图书馆建于1955年。现有建设面积5.22万平方米（沙河校区图书馆3.67万平方米）。'
-				},
-				{
-					pic: 'https://th.bing.com/th/id/R.dbdc398dbbbf6f9bd71055e8bd532cd8?rik=6hjTjhOaYy%2fF7w&riu=http%3a%2f%2fedu.cnr.cn%2feduzt%2fyddx%2fyddxxyyy%2f20170527%2fW020170527533291504115.jpg&ehk=1ZuMM1%2bGR7kccHjroOZvTzEaBPNYMd%2f3PqfOxcpuw4k%3d&risl=&pid=ImgRaw&r=0',
-					name: '图书馆',
-					detail: '北京邮电大学图书馆建于1955年。现有建设面积5.22万平方米（沙河校区图书馆3.67万平方米）。'
-				},
-				{
-					pic: 'https://th.bing.com/th/id/R.dbdc398dbbbf6f9bd71055e8bd532cd8?rik=6hjTjhOaYy%2fF7w&riu=http%3a%2f%2fedu.cnr.cn%2feduzt%2fyddx%2fyddxxyyy%2f20170527%2fW020170527533291504115.jpg&ehk=1ZuMM1%2bGR7kccHjroOZvTzEaBPNYMd%2f3PqfOxcpuw4k%3d&risl=&pid=ImgRaw&r=0',
-					name: '图书馆',
-					detail: '北京邮电大学图书馆建于1955年。现有建设面积5.22万平方米（沙河校区图书馆3.67万平方米）。'
-				},
-				{
-					pic: 'https://th.bing.com/th/id/R.dbdc398dbbbf6f9bd71055e8bd532cd8?rik=6hjTjhOaYy%2fF7w&riu=http%3a%2f%2fedu.cnr.cn%2feduzt%2fyddx%2fyddxxyyy%2f20170527%2fW020170527533291504115.jpg&ehk=1ZuMM1%2bGR7kccHjroOZvTzEaBPNYMd%2f3PqfOxcpuw4k%3d&risl=&pid=ImgRaw&r=0',
-					name: '图书馆',
-					detail: '北京邮电大学图书馆建于1955年。现有建设面积5.22万平方米（沙河校区图书馆3.67万平方米）。'
-				}
-			]
+			nearbys: [],
+			_const
 		}
 	},
 	onLoad: function(option) {
 		this.name = option.name
+	},
+	methods: {
+		handleBack() {
+			uni.navigateBack(1)
+		}
 	},
 }
 </script>

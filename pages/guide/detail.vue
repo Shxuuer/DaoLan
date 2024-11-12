@@ -6,10 +6,10 @@
 		</view>
 		<view class="main">
 			<view class="select-bar">
-				<view :style="{backgroundColor: selectedID === 0 ? '#dfdfdf' : '#ffffff'}" @click="changeSelected(0)">介绍</view>
+				<view :style="{backgroundColor: selectedID === 0 ? '#dfdfdf' : '#ffffff', borderRadius: '20rpx 0 0 20rpx'}" @click="changeSelected(0)">介绍</view>
 				<view :style="{backgroundColor: selectedID === 1 ? '#dfdfdf' : '#ffffff'}" @click="changeSelected(1)">位置</view>
 				<view :style="{backgroundColor: selectedID === 2 ? '#dfdfdf' : '#ffffff'}" @click="changeSelected(2)">相关地点</view>
-				<view :style="{backgroundColor: selectedID === 3 ? '#dfdfdf' : '#ffffff'}" @click="changeSelected(3)">VR</view>
+				<view :style="{backgroundColor: selectedID === 3 ? '#dfdfdf' : '#ffffff', borderRadius: '0 20rpx 20rpx 0'}" @click="changeSelected(3)">VR</view>
 			</view>
 			<view class="content">
 				<template v-if="selectedID === 0" style="position: relative;width: 100%;">
@@ -18,7 +18,7 @@
 					</view>
 				</template>
 				<template v-if="selectedID === 1" style="position: relative;width: 100%;">
-					<MyMap :L_title="L_title" :L_latitude="L_latitude" :L_longitude="L_longitude"/>
+					<MyMap :L_title="L_title" :L_latitude="L_latitude" :L_longitude="L_longitude" height="50vh"/>
 				</template>
 				<view v-if="selectedID === 2" style="position: relative;width: 100%;">
 					<NearbyPosition :nearby_position="nearbys"></NearbyPosition>
@@ -118,17 +118,18 @@ export default {
 	position: relative;
 	width: 100vw;
 	margin-bottom: 20rpx;
-	min-height: 40vh;
+	min-height: 50vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	height: 100%;
 }
 
 .select-bar {
 	box-sizing: border-box;
 	background: #FFFFFF;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-	border-radius: 12px;
+	border-radius: 20rpx;
 	display: flex;
 	flex-direction: row;
 	margin-top: 40rpx;
@@ -147,7 +148,7 @@ export default {
 	align-items: center;
 	text-align: center;
 	letter-spacing: 0.03em;
-
+	
 	color: #333333;
 
 	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

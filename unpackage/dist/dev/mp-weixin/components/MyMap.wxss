@@ -1,16 +1,21 @@
 
 .map.data-v-b9e52463 {
 	width: 100vw;
-	height: 650rpx;
 }
 .ctrl.data-v-b9e52463 {
 	position: absolute;
 	right: 40rpx;
-	top: 40rpx;
-	padding: 20rpx;
+	bottom: 60rpx;
 	z-index: 2;
+	width: 60rpx;
+	height: 60rpx;
 	
-	background: #3182CE;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	
+	background-color: #fff;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 	border-radius: 5px;
 	color: #FCFCFC;

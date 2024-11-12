@@ -1,17 +1,19 @@
 <template>
 	<view style="position: relative;" class="map">
-		<view class="ctrl" @click="refresh">刷新</view>
+		<view class="ctrl" @click="refresh">
+			<image src="../static/locate.svg" style="width: 50rpx;height: 50rpx"></image>
+		</view>
 		<map class="map" id="map" :longitude="longitude" :latitude="latitude"
-		 :scale="scale" show-location="true" :markers="markers" @updated="update">
+		 :scale="scale" show-location="true" :markers="markers" @updated="update"
+		 :style="{height: height || '650rpx'}">
 		</map>
 	</view>
 </template>
 
 <script>
-
 export default {
 	name: 'MyMap',
-	props: ['L_latitude', 'L_longitude', 'L_title'],
+	props: ['L_latitude', 'L_longitude', 'L_title', 'height'],
 	emits: ['update:latitude', 'update:longitude'],
 	data () {
 		return { 
@@ -19,7 +21,8 @@ export default {
 			markers: [],
 			getLocationTimer: null,
 			latitude: '',
-			longitude: ''
+			longitude: '',
+			heightZ: ''
 		}
 	},
 	methods: {
@@ -63,16 +66,21 @@ export default {
 <style scoped>
 .map {
 	width: 100vw;
-	height: 650rpx;
 }
 .ctrl {
 	position: absolute;
 	right: 40rpx;
-	top: 40rpx;
-	padding: 20rpx;
+	bottom: 60rpx;
 	z-index: 2;
+	width: 60rpx;
+	height: 60rpx;
 	
-	background: #3182CE;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	
+	background-color: #fff;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 	border-radius: 5px;
 	color: #FCFCFC;

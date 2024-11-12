@@ -2,7 +2,7 @@
 const common_vendor = require("../../common/vendor.js");
 const static_const = require("../../static/const.js");
 const TopBar = () => "../../components/TopBar.js";
-const NearbyPosition = () => "../../components/NearbyPosition.js";
+const NearbyPosition = () => "../../components/NearbyPosition2.js";
 const MyMap = () => "../../components/MyMap.js";
 const _sfc_main = {
   name: "detail",
@@ -73,7 +73,8 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     o: common_vendor.p({
       L_title: $data.L_title,
       L_latitude: $data.L_latitude,
-      L_longitude: $data.L_longitude
+      L_longitude: $data.L_longitude,
+      height: "50vh"
     })
   } : {}, {
     p: $data.selectedID === 2

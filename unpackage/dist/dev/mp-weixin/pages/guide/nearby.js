@@ -2,7 +2,7 @@
 const common_vendor = require("../../common/vendor.js");
 const static_const = require("../../static/const.js");
 const TopBar = () => "../../components/TopBar.js";
-const NearbyPosition = () => "../../components/NearbyPosition.js";
+const NearbyPosition = () => "../../components/NearbyPosition2.js";
 const SelectGroup = () => "../../components/SelectGroup.js";
 const MyMap = () => "../../components/MyMap.js";
 const _sfc_main = {

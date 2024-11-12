@@ -38,16 +38,17 @@
 	position: relative;
 	width: 100vw;
 	margin-bottom: 20rpx;
-	min-height: 40vh;
+	min-height: 50vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	height: 100%;
 }
 .select-bar.data-v-a46a4f2b {
 	box-sizing: border-box;
 	background: #FFFFFF;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-	border-radius: 12px;
+	border-radius: 20rpx;
 	display: flex;
 	flex-direction: row;
 	margin-top: 40rpx;
@@ -65,7 +66,7 @@
 	align-items: center;
 	text-align: center;
 	letter-spacing: 0.03em;
-
+	
 	color: #333333;
 
 	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

@@ -8,6 +8,12 @@
 	gap: 20rpx;
 	overflow: scroll;
 }
+.data-v-3f7cdf4c::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+  color: transparent;
+}
 .select-cell.data-v-3f7cdf4c {
 	position: relative;
 	width: 140rpx;

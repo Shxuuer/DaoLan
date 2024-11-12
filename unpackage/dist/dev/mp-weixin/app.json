@@ -6,7 +6,8 @@
     "pages/guide/nearby",
     "pages/guide/detail",
     "pages/vr/index",
-    "pages/my/index"
+    "pages/my/index",
+    "components/NearbyPosition"
   ],
   "window": {
     "navigationBarTextStyle": "black",

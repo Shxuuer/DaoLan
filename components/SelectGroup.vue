@@ -46,6 +46,13 @@ export default {
 	gap: 20rpx;
 	overflow: scroll;
 }
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
 .select-cell {
 	position: relative;
 	width: 140rpx;

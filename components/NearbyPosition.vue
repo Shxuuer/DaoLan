@@ -11,11 +11,12 @@
 				</view>
 				<view class="btns">
 					<view class="inner-btn" @click.stop="goToInner(item.Title, 1)" v-if="!isInner">
-						<text>
-							室内
-						</text>
+						<text style="width: 100%;text-align: center;">室内</text>
 					</view>
-					<view class="inner-btn" @click.stop="playSound(item.Description)">
+					<view class="inner-btn" @click.stop="goToInner(item.Title, 1)" v-if="isInner">
+						<text style="width: 100%;text-align: center;">详情</text>
+					</view>
+					<view class="inner-btn" @click.stop="playSound(item.Description)" style="width: 30rpx;position: relative;right: 0">
 						<image src="../static/volume.svg" class="sound-btn"></image>
 					</view>
 				</view>
@@ -71,22 +72,24 @@ export default {
 	width: 14px;
 }
 .btns {
-	width: 30%;
+	width: 25%;
 	gap: 30rpx;
 	height: 100%;
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	align-items: flex-end;
+	margin-left: auto;
+	margin-right: 25rpx;
 }
 .inner-btn {
 	background: #F0F0F0;
 	border: 1px solid #EAEAEA;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
 	border-radius: 5px;
-	padding: 10rpx;
-	margin-right: 25rpx;
-
+	padding: 15rpx;
+	padding-left: 22rpx;
 	font-family: 'Roboto';
 	font-style: normal;
 	font-weight: 600;
@@ -98,6 +101,7 @@ export default {
 	letter-spacing: 3px;
 	color: #888888;
 }
+
 .info {
 	height: 200rpx;
 	overflow: hidden;
@@ -123,6 +127,11 @@ export default {
 	font-weight: 400;
 	font-size: 12px;
 	line-height: 14px;
+	height: 56px;
+	
+	/* white-space: nowrap; */
+	overflow: hidden;
+	text-overflow: ellipsis;
 	
 	color: #333333;
 }
