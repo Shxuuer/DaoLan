@@ -5,10 +5,15 @@ const _sfc_main = {
   name: "inner",
   components: { TopBar },
   data() {
-    return {};
+    return {
+      pageInfo: {
+        name: "",
+        Detail: "",
+        imgUrl: ""
+      }
+    };
   },
   onLoad: function(option) {
-    this.name = option.name;
   }
 };
 if (!Array) {
@@ -18,9 +23,10 @@ if (!Array) {
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
     a: common_vendor.p({
-      name: _ctx.name
+      name: $data.pageInfo.name
     }),
-    b: common_vendor.t(_ctx.detail)
+    b: $data.pageInfo.imgUrl,
+    c: common_vendor.t($data.pageInfo.Detail)
   };
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-85a513d6"]]);

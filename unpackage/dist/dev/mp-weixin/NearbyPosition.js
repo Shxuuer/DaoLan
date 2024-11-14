@@ -11,7 +11,11 @@ const _sfc_main = {
     };
   },
   methods: {
-    goToDetail(name, id) {
+    goToDetail(name, id, index) {
+      if (this.isInner) {
+        this.gotoInnerDetail(index);
+        return;
+      }
       const page = getCurrentPages();
       const path = `/pages/guide/detail?name=${name}&id=${id}`;
       if (page[page.length - 1].route === "pages/guide/detail")
@@ -20,10 +24,9 @@ const _sfc_main = {
         common_vendor.index.navigateTo({ url: path });
     },
     goToInner(name, type) {
-      if (type === 1)
-        common_vendor.index.navigateTo({ url: "/pages/guide/inner?name=" + name });
-      else if (type === 2)
-        common_vendor.index.navigateTo({ url: "/pages/guide/inner?name=" + name });
+      common_vendor.index.navigateTo({ url: "/pages/guide/inner?name=" + name });
+    },
+    gotoInnerDetail(index) {
     },
     playSound(text) {
       const plugin = requirePlugin("WechatSI");
@@ -51,10 +54,10 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       }, !$props.isInner ? {
         d: common_vendor.o(($event) => $options.goToInner(item.Title, 1), index)
       } : {}, $props.isInner ? {
-        e: common_vendor.o(($event) => $options.goToInner(item.Title, 1), index)
+        e: common_vendor.o(($event) => $options.goToDetail(item.Title, item.ID, index), index)
       } : {}, {
         f: common_vendor.o(($event) => $options.playSound(item.Description), index),
-        g: common_vendor.o(($event) => $options.goToDetail(item.Title, item.ID), index),
+        g: common_vendor.o(($event) => $options.goToDetail(item.Title, item.ID, index), index),
         h: index
       });
     }),

@@ -1,7 +1,7 @@
 <template>
 	<view class="list">
 		<template v-for="(item,index) in nearby_position" :key="index">
-			<view class="item" @click="goToDetail(item.Title, item.ID)">
+			<view class="item" @click="goToDetail(item.Title, item.ID, index)">
 				<view class="pic">
 					<image :src="_const.baseURL + item.Resource.CoverImages[item.Resource.CoverImages.length - 1]" class="pic-img"></image>
 				</view>
@@ -13,7 +13,7 @@
 					<view class="inner-btn" @click.stop="goToInner(item.Title, 1)" v-if="!isInner">
 						<text style="width: 100%;text-align: center;">室内</text>
 					</view>
-					<view class="inner-btn" @click.stop="goToInner(item.Title, 1)" v-if="isInner">
+					<view class="inner-btn" @click.stop="goToDetail(item.Title, item.ID, index)" v-if="isInner">
 						<text style="width: 100%;text-align: center;">详情</text>
 					</view>
 					<view class="inner-btn" @click.stop="playSound(item.Description)" style="width: 30rpx;position: relative;right: 0">
@@ -36,7 +36,11 @@ export default {
 		};
 	},
 	methods: {
-		goToDetail(name, id) {
+		goToDetail(name, id, index) {
+			if (this.isInner) {
+				this.gotoInnerDetail(index)
+				return
+			}
 			const page = getCurrentPages()
 			const path = `/pages/guide/detail?name=${name}&id=${id}`
 			if (page[page.length - 1].route === 'pages/guide/detail') 
@@ -44,8 +48,13 @@ export default {
 			else uni.navigateTo({ url: path})
 		},
 		goToInner(name, type) {
-			if (type === 1) uni.navigateTo({ url: "/pages/guide/inner?name="+name })
-			else if (type === 2) uni.navigateTo({ url: "/pages/guide/inner?name="+name })
+			uni.navigateTo({ url: "/pages/guide/inner?name="+name })
+		},
+		gotoInnerDetail(index) {
+			// const tmp = this.nearby_position[index]
+			// uni.navigateTo({
+			// 	url: `/pages/guide/innerDetail?name=${tmp.Title}&Detail=${tmp.Description}&imgUrl=${tmp.Resource.CoverImages[1]}`
+			// })
 		},
 		playSound(text) {
 			const plugin = requirePlugin("WechatSI")

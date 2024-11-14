@@ -1,13 +1,13 @@
 <template>
-	<TopBar :name="name" style="position: fixed; z-index: 1;top: 0;"></TopBar>
+	<TopBar :name="pageInfo.name" style="position: fixed; z-index: 1;top: 0;"></TopBar>
 	<view style="position: relative;">
 		<view style="display: flex;flex-direction: column;align-items: center;position: fixed;top: 200rpx;z-index: -1;width: 100vw;">
-			<image class="image" src="https://th.bing.com/th/id/R.dbdc398dbbbf6f9bd71055e8bd532cd8?rik=6hjTjhOaYy%2fF7w&riu=http%3a%2f%2fedu.cnr.cn%2feduzt%2fyddx%2fyddxxyyy%2f20170527%2fW020170527533291504115.jpg&ehk=1ZuMM1%2bGR7kccHjroOZvTzEaBPNYMd%2f3PqfOxcpuw4k%3d&risl=&pid=ImgRaw&r=0"></image>
+			<image class="image" :src="pageInfo.imgUrl"></image>
 		</view>
 		<view class="main">
 			<view class="content">
 				<view class="reader">
-					{{detail}}
+					{{pageInfo.Detail}}
 				</view>
 			</view>
 		</view>
@@ -22,10 +22,18 @@ export default {
 	components: {TopBar},
 	data() {
 		return {
+			pageInfo: {
+				name: "",
+				Detail: "",
+				imgUrl: ""
+			}
 		}
 	},
 	onLoad: function(option) {
-		this.name = option.name
+		
+		// this.pageInfo = {...option}
+		// console.log(this.pageInfo)
+		
 	},
 }
 </script>

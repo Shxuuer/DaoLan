@@ -48,7 +48,7 @@ export default {
 		return {
 			name: '',
 			id: '',
-			types: ['休闲区','娱乐区','学习区','学习区','学习区','学习区'],
+			types: ['休闲区','娱乐区','学习区','住宿区'],
 			_const,
 			nearbys: [],
 			L_title: '',
