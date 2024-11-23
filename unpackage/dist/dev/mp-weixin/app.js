@@ -9,7 +9,6 @@ if (!Math) {
   "./pages/guide/detail.js";
   "./pages/vr/index.js";
   "./pages/my/index.js";
-  "./components/NearbyPosition.js";
 }
 const _sfc_main = {
   onLaunch: function() {

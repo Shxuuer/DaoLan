@@ -22,7 +22,7 @@ const _sfc_main = {
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
     a: common_vendor.t($props.name),
-    b: common_assets._imports_0$2,
+    b: common_assets._imports_0$1,
     c: common_vendor.o((...args) => $options.handleBack && $options.handleBack(...args)),
     d: $data.icon.top - 1 + "px",
     e: $data.icon.bottom + 20 + "px"

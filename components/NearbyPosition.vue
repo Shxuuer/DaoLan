@@ -1,22 +1,23 @@
 <template>
 	<view class="list">
 		<template v-for="(item,index) in nearby_position" :key="index">
-			<view class="item" @click="goToDetail(item.Title, item.ID, index)">
-				<view class="pic">
-					<image :src="_const.baseURL + item.Resource.CoverImages[item.Resource.CoverImages.length - 1]" class="pic-img"></image>
+			<view class="item" @click="goToDetail(item.title, item.id, index)">
+				<view class="pic" v-if="item.resource.coverImages">
+					<image :src="_const.imgURL + item.resource.coverImages" class="pic-img"></image>
 				</view>
 				<view class="info">
-					<view class="name">{{item.Title}}</view>
-					<view class="detail">{{item.Description}}</view>
+					<view class="name">{{item.title}}</view>
+					<view class="detail">{{item.description}}</view>
 				</view>
 				<view class="btns">
-					<view class="inner-btn" @click.stop="goToInner(item.Title, 1)" v-if="!isInner">
+					<view class="inner-btn" @click.stop="goToInner(item.title, item.id)" v-if="!isInner && item.hasSurfaces">
 						<text style="width: 100%;text-align: center;">室内</text>
 					</view>
-					<view class="inner-btn" @click.stop="goToDetail(item.Title, item.ID, index)" v-if="isInner">
+					<view class="inner-btn" @click.stop="goToDetail(item.title, item.id, index)" v-if="isInner">
 						<text style="width: 100%;text-align: center;">详情</text>
 					</view>
-					<view class="inner-btn" @click.stop="playSound(item.Description)" style="width: 30rpx;position: relative;right: 0">
+					<view class="inner-btn" @click.stop="playSound(item.description)" 
+						style="width: 30rpx;position: relative;right: 0" v-if="item.resource.audio!='' && item.resource.audio">
 						<image src="../static/volume.svg" class="sound-btn"></image>
 					</view>
 				</view>
@@ -44,11 +45,11 @@ export default {
 			const page = getCurrentPages()
 			const path = `/pages/guide/detail?name=${name}&id=${id}`
 			if (page[page.length - 1].route === 'pages/guide/detail') 
-				uni.redirectTo({ url: path})
-			else uni.navigateTo({ url: path})
+				uni.redirectTo({ url: path })
+			else uni.navigateTo({ url: path })
 		},
-		goToInner(name, type) {
-			uni.navigateTo({ url: "/pages/guide/inner?name="+name })
+		goToInner(name, id) {
+			uni.navigateTo({ url: `/pages/guide/inner?name=${name}&id=${id}` })
 		},
 		gotoInnerDetail(index) {
 			// const tmp = this.nearby_position[index]
@@ -57,18 +58,6 @@ export default {
 			// })
 		},
 		playSound(text) {
-			const plugin = requirePlugin("WechatSI")
-			plugin.textToSpeech({
-			    lang: "zh_CN",
-			    tts: true,
-			    content: text,
-			    success: function(res) {
-			        console.log("succ tts", res.filename)   
-			    },
-			    fail: function(res) {
-			        console.log("fail tts", res)
-			    }
-			})
 		}
 	}
 }

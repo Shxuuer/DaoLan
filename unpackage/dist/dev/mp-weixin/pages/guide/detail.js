@@ -2,7 +2,7 @@
 const common_vendor = require("../../common/vendor.js");
 const static_const = require("../../static/const.js");
 const TopBar = () => "../../components/TopBar.js";
-const NearbyPosition = () => "../../components/NearbyPosition2.js";
+const NearbyPosition = () => "../../components/NearbyPosition.js";
 const MyMap = () => "../../components/MyMap.js";
 const _sfc_main = {
   name: "detail",
@@ -24,13 +24,13 @@ const _sfc_main = {
     this.name = option.name;
     common_vendor.index.request({
       method: "GET",
-      url: static_const._const.baseURL + "/api/miniapp/outdoor-place?id=" + option.id,
+      url: static_const._const.baseURL + "/api/miniapp/place/" + option.id,
       data: {},
       success: (res) => {
-        this.place = res.data.Place;
-        this.nearbys = res.data.Nearby;
-        this.L_title = res.data.Place.Title;
-        const temp = res.data.Place.Location.split(",");
+        this.place = res.data.place;
+        this.nearbys = res.data.nearby;
+        this.L_title = res.data.place.title;
+        const temp = res.data.place.location.split(",");
         this.L_latitude = Number(temp[0]);
         this.L_longitude = Number(temp[1]);
       }
@@ -51,11 +51,11 @@ if (!Array) {
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return common_vendor.e({
     a: common_vendor.p({
-      name: $data.place.Title
+      name: $data.place.title
     }),
-    b: $data.place.Resource
-  }, $data.place.Resource ? common_vendor.e({
-    c: $data._const.baseURL + $data.place.Resource.CoverImages[$data.place.Resource.CoverImages.length - 1],
+    b: $data.place.resource
+  }, $data.place.resource ? common_vendor.e({
+    c: $data._const.imgURL + $data.place.resource.coverImages,
     d: $data.selectedID === 0 ? "#dfdfdf" : "#ffffff",
     e: common_vendor.o(($event) => $options.changeSelected(0)),
     f: $data.selectedID === 1 ? "#dfdfdf" : "#ffffff",
@@ -66,7 +66,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     k: common_vendor.o(($event) => $options.changeSelected(3)),
     l: $data.selectedID === 0
   }, $data.selectedID === 0 ? {
-    m: common_vendor.t($data.place.Description)
+    m: common_vendor.t($data.place.description)
   } : {}, {
     n: $data.selectedID === 1
   }, $data.selectedID === 1 ? {

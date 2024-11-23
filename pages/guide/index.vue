@@ -26,7 +26,7 @@ export default {
 		    url: _const.baseURL + '/api/miniapp/home',
 		    data: {},
 		    success: (res) => {
-		        this.schools = res.data.Regions
+		        this.schools = res.data.regions
 		    },
 			fail(res) {
 		    	console.log(res)
@@ -46,16 +46,18 @@ export default {
 				<view class="content-name">沙河高教园</view>
 				<view class="list">
 					<template v-for="cell, index in schools" :key="index">
-						<view class="school" @click="handleClick(cell.ID, cell.Title)">
+						<view class="school" @click="handleClick(cell.id, cell.title)">
 							<view class="school-pic">
-								<image class="school-image" :src="_const.baseURL + cell.Resource.CoverImages[cell.Resource.CoverImages.length-1]"></image>
+								<image class="school-image" 
+								:src="_const.imgURL + cell.resource.coverImages[cell.resource.coverImages.length-1]">
+								</image>
 							</view>
 							<view class="school-text">
 								<view class="school-name">
-									{{cell.Title}}
+									{{cell.title}}
 								</view>
 								<view class="school-detail">
-									{{cell.Description}}
+									{{cell.description}}
 								</view>
 							</view>
 						</view>

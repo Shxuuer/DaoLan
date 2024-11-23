@@ -2,7 +2,7 @@
 const common_vendor = require("../../common/vendor.js");
 const static_const = require("../../static/const.js");
 const TopBar = () => "../../components/TopBar.js";
-const NearbyPosition = () => "../../components/NearbyPosition2.js";
+const NearbyPosition = () => "../../components/NearbyPosition.js";
 const SelectGroup = () => "../../components/SelectGroup.js";
 const MyMap = () => "../../components/MyMap.js";
 const _sfc_main = {
@@ -13,13 +13,21 @@ const _sfc_main = {
     common_vendor.index.request({
       url: static_const._const.baseURL + "/api/miniapp/outdoor",
       method: "POST",
-      data: {},
+      data: {
+        regionId: option.id,
+        "lat": 0,
+        "lng": 0,
+        "acc": 0,
+        "beacons": [""]
+      },
       success: (res) => {
-        this.nearbys = res.data.Places;
-        this.L_title = res.data.Region.Title;
-        const temp = res.data.Region.Circle.split(",");
+        this.nearbys = res.data.places;
+        this.real_nearbys = res.data.places;
+        this.L_title = res.data.region.title;
+        const temp = res.data.region.circle.split(",");
         this.L_latitude = Number(temp[0]);
         this.L_longitude = Number(temp[1]);
+        this.prepareTags();
       },
       fail(res) {
         console.log(res);
@@ -30,15 +38,38 @@ const _sfc_main = {
     return {
       name: "",
       id: "",
-      types: ["休闲区", "娱乐区", "学习区", "学习区", "学习区", "学习区"],
+      types: [],
       _const: static_const._const,
       nearbys: [],
       L_title: "",
       L_latitude: "",
-      L_longitude: ""
+      L_longitude: "",
+      real_nearbys: []
     };
   },
-  methods: {},
+  methods: {
+    handleSelect(tag) {
+      if (tag == void 0) {
+        this.real_nearbys = this.nearbys;
+      } else {
+        const tmp = [];
+        this.nearbys.forEach((item) => {
+          if (item.tags.indexOf(tag) != -1)
+            tmp.push(item);
+        });
+        this.real_nearbys = tmp;
+      }
+    },
+    prepareTags() {
+      this.nearbys.forEach((item) => {
+        item.tags.forEach((tag) => {
+          if (this.types.indexOf(tag) == -1) {
+            this.types.push(tag);
+          }
+        });
+      });
+    }
+  },
   watch: {}
 };
 if (!Array) {
@@ -53,16 +84,17 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     a: common_vendor.p({
       name: $data.name
     }),
-    b: common_vendor.p({
+    b: common_vendor.o($options.handleSelect),
+    c: common_vendor.p({
       types: $data.types
     }),
-    c: common_vendor.p({
+    d: common_vendor.p({
       L_title: $data.L_title,
       L_latitude: $data.L_latitude,
       L_longitude: $data.L_longitude
     }),
-    d: common_vendor.p({
-      nearby_position: $data.nearbys
+    e: common_vendor.p({
+      nearby_position: $data.real_nearbys
     })
   };
 }

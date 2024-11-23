@@ -59,7 +59,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return common_vendor.e({
     a: $data.colors.guide !== "#3182CE"
   }, $data.colors.guide !== "#3182CE" ? {
-    b: common_assets._imports_0$1
+    b: common_assets._imports_0
   } : {
     c: common_assets._imports_1
   }, {

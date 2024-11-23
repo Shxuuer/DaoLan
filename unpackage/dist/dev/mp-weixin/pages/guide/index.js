@@ -26,7 +26,7 @@ const _sfc_main = {
       url: static_const._const.baseURL + "/api/miniapp/home",
       data: {},
       success: (res) => {
-        this.schools = res.data.Regions;
+        this.schools = res.data.regions;
       },
       fail(res) {
         console.log(res);
@@ -42,10 +42,10 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
     a: common_vendor.f($data.schools, (cell, index, i0) => {
       return {
-        a: $data._const.baseURL + cell.Resource.CoverImages[cell.Resource.CoverImages.length - 1],
-        b: common_vendor.t(cell.Title),
-        c: common_vendor.t(cell.Description),
-        d: common_vendor.o(($event) => $options.handleClick(cell.ID, cell.Title), index),
+        a: $data._const.imgURL + cell.resource.coverImages[cell.resource.coverImages.length - 1],
+        b: common_vendor.t(cell.title),
+        c: common_vendor.t(cell.description),
+        d: common_vendor.o(($event) => $options.handleClick(cell.id, cell.title), index),
         e: index
       };
     }),

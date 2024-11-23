@@ -53,7 +53,7 @@ const _sfc_main = {
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return {
-    a: common_assets._imports_0$4,
+    a: common_assets._imports_0$3,
     b: common_vendor.o((...args) => $options.refresh && $options.refresh(...args)),
     c: $data.longitude,
     d: $data.latitude,

@@ -2,7 +2,7 @@
 	<view style="position: relative">
 		<view style="z-index: 1;position: fixed; background-color: #ffffff;">
 			<TopBar :name="name"></TopBar>
-			<SelectGroup :types="types"></SelectGroup>
+			<SelectGroup :types="types" @select="handleSelect"></SelectGroup>
 		</view>
 		<!-- 地图 -->
 		<view class="map" style="z-index: 0;position: fixed;">
@@ -11,7 +11,7 @@
 		<!-- 附近地点 -->
 		<view class="near-by" style="z-index: 0;top: 890rpx;">
 			<view class="nearby-text">附近地点</view>
-			<NearbyPosition :nearby_position="nearbys" style="top: 80rpx; position: relative;"></NearbyPosition>
+			<NearbyPosition :nearby_position="real_nearbys" style="top: 80rpx; position: relative;"></NearbyPosition>
 		</view>
 	</view>
 </template>
@@ -31,13 +31,21 @@ export default {
 		uni.request({
 			url: _const.baseURL + '/api/miniapp/outdoor',
 			method: 'POST',
-		    data: {},
+		    data: {
+				regionId: option.id,
+				"lat": 0,
+				"lng": 0,
+				"acc": 0,
+				"beacons": [""]
+			},
 		    success: (res) => {
-				this.nearbys = res.data.Places
-				this.L_title = res.data.Region.Title
-				const temp = res.data.Region.Circle.split(',')
+				this.nearbys = res.data.places
+				this.real_nearbys = res.data.places
+				this.L_title = res.data.region.title
+				const temp = res.data.region.circle.split(',')
 				this.L_latitude = Number(temp[0])
 				this.L_longitude = Number(temp[1])
+				this.prepareTags()
 		    },
 			fail(res) {
 		    	console.log(res)
@@ -48,15 +56,36 @@ export default {
 		return {
 			name: '',
 			id: '',
-			types: ['休闲区','娱乐区','学习区','住宿区'],
+			types: [],
 			_const,
 			nearbys: [],
 			L_title: '',
 			L_latitude: '',
-			L_longitude: ''
+			L_longitude: '',
+			real_nearbys: []
 		}
 	},
 	methods: {
+		handleSelect(tag) {
+			if (tag == undefined) {
+				this.real_nearbys = this.nearbys
+			} else {
+				const tmp = []
+				this.nearbys.forEach(item => {
+					if (item.tags.indexOf(tag) != -1) tmp.push(item)
+				})
+				this.real_nearbys = tmp
+			}
+		},
+		prepareTags() {
+			this.nearbys.forEach((item) => {
+				item.tags.forEach((tag) => {
+					if(this.types.indexOf(tag) == -1) {
+						this.types.push(tag)
+					}
+				})
+			})
+		}
 	},
 	watch: {
 	},

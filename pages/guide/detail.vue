@@ -1,8 +1,8 @@
 <template>
-	<TopBar :name="place.Title" style="position: fixed; z-index: 1;top: 0;"></TopBar>
-	<view style="position: relative;" v-if="place.Resource">
+	<TopBar :name="place.title" style="position: fixed; z-index: 1;top: 0;"></TopBar>
+	<view style="position: relative;" v-if="place.resource">
 		<view style="display: flex;flex-direction: column;align-items: center;position: fixed;top: 200rpx;z-index: -1;width: 100vw;">
-			<image class="image" :src="_const.baseURL + place.Resource.CoverImages[place.Resource.CoverImages.length - 1]"></image>
+			<image class="image" :src="_const.imgURL + place.resource.coverImages"></image>
 		</view>
 		<view class="main">
 			<view class="select-bar">
@@ -14,7 +14,7 @@
 			<view class="content">
 				<template v-if="selectedID === 0" style="position: relative;width: 100%;">
 					<view class="reader">
-						{{place.Description}}
+						{{place.description}}
 					</view>
 				</template>
 				<template v-if="selectedID === 1" style="position: relative;width: 100%;">
@@ -56,14 +56,14 @@ export default {
 		this.name = option.name
 		uni.request({
 			method: 'GET',
-			url: _const.baseURL + '/api/miniapp/outdoor-place?id=' + option.id,
+			url: _const.baseURL + '/api/miniapp/place/' + option.id,
 			data: {},
 			success: (res) => {
-				this.place = res.data.Place
-				this.nearbys = res.data.Nearby
+				this.place = res.data.place
+				this.nearbys = res.data.nearby
 				
-				this.L_title = res.data.Place.Title
-				const temp = res.data.Place.Location.split(',')
+				this.L_title = res.data.place.title
+				const temp = res.data.place.location.split(',')
 				this.L_latitude = Number(temp[0])
 				this.L_longitude = Number(temp[1])
 			}
