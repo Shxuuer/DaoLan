@@ -2,7 +2,7 @@
 	<TopBar :name="pageInfo.name" style="position: fixed; z-index: 1;top: 0;"></TopBar>
 	<view style="position: relative;">
 		<view style="display: flex;flex-direction: column;align-items: center;position: fixed;top: 200rpx;z-index: -1;width: 100vw;">
-			<image class="image" :src="pageInfo.imgUrl"></image>
+			<image class="image" :src="_const.imgURL + pageInfo.imgUrl"></image>
 		</view>
 		<view class="main">
 			<view class="content">
@@ -16,6 +16,7 @@
 
 <script>
 import TopBar from '../../components/TopBar.vue'
+import _const from '../../static/const'
 
 export default {
 	name: 'inner',
@@ -26,14 +27,12 @@ export default {
 				name: "",
 				Detail: "",
 				imgUrl: ""
-			}
+			},
+			_const
 		}
 	},
 	onLoad: function(option) {
-		
-		// this.pageInfo = {...option}
-		// console.log(this.pageInfo)
-		
+		this.pageInfo = {...option}
 	},
 }
 </script>

@@ -2,10 +2,20 @@
 const common_vendor = require("../common/vendor.js");
 const _sfc_main = {
   name: "SelectGroup",
-  props: ["types"],
+  props: {
+    types: {},
+    default: {
+      default: void 0
+    },
+    ifCancel: {
+      default: true
+    }
+  },
   emits: ["select"],
   methods: {
     handleSelect(index) {
+      if (this.selected === index && !this.ifCancel)
+        return;
       if (this.selected === index) {
         this.selected = -1;
         this.$emit("select", void 0);
@@ -19,6 +29,12 @@ const _sfc_main = {
     return {
       selected: -1
     };
+  },
+  watch: {
+    default() {
+      if (this.default !== void 0)
+        this.selected = this.default;
+    }
   }
 };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {

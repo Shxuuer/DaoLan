@@ -15,10 +15,20 @@
 <script>
 export default {
 	name: 'SelectGroup',
-	props: ['types'],
+	props: {
+		types: {
+		},
+		default: {
+			default: undefined
+		},
+		ifCancel: {
+			default: true
+		}
+	},
 	emits: ['select'],
 	methods: {
 		handleSelect(index) {
+			if (this.selected === index && !this.ifCancel) return
 			if (this.selected === index) {
 				this.selected = -1
 				this.$emit('select', undefined)
@@ -31,6 +41,11 @@ export default {
 	data() {
 		return {
 			selected: -1
+		}
+	},
+	watch: {
+		default() {
+		  if (this.default !== undefined) this.selected = this.default
 		}
 	}
 }

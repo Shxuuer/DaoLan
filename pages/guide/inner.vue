@@ -2,21 +2,20 @@
 	<view style="position: relative;">
 		<view class="floor">
 			<TopBar :name="name"></TopBar>
-			<SelectGroup :types="types"></SelectGroup>
+			<SelectGroup :types="types" :default="selectedFloorIndex" :ifCancel="false" @select="handleFloorChange"></SelectGroup>
 		</view>
         <!-- 地图 -->
-		<view ref="mapContainer" style="z-index: -1;position: fixed;top: 320rpx;width: 100%;">
-			<image ref="mapImage" src="http://[2001:da8:215:81f0:215:5dff:fe08:603]:8000/室内地图.png"
-			 :style="{objectFit: 'contain' }" @load="onMapLoad"></image>
-            <!-- <img v-for="pos in selectedItem.positions" :key="pos.id" :src="'../../static/map-pin.svg#map-pin'" :style="getPinStyle(pos)" /> -->
+		<view style="z-index: -1;position: fixed;top: 320rpx;width: 100vw;" v-if="selectedFloorIndex!==undefined">
+			<image :src="_const.imgURL + surfaces[selectedFloorIndex].resource.backgroundImage"
+			 mode="widthFix" style="display: block;width: 100%;" id="imageContain" @load="barHeight"></image>
 		</view>
 		<!-- 附近地点 -->
-		<view class="near-by" style="z-index: 0;top: 800rpx;">
+		<view class="near-by" style="z-index: 0;" :style="{top: imgHeight + 'px'}">
 			<view style="position: relative;align-items: center;">
 				<view class="nearby-text">附近地点</view>
 				<view class="back-to" @click="handleBack">回到室外</view>
 			</view>
-            <NearbyPosition :nearby_position="nearbys" style="top: 80rpx; position: relative;" :isInner="true" @item-clicked="handleItemClicked"></NearbyPosition>
+            <NearbyPosition :nearby_position="nearbys" style="top: 80rpx; position: relative;" :isInner="true"></NearbyPosition>
 		</view>
 	</view>
 </template>
@@ -33,34 +32,13 @@ export default {
 	data() {
 		return {
 			name: '',
-			types: ['1F', '2F', '3F', '4F', '5F'],
+			types: [],
 			nearbys: [],
 			_const,
-            mapScale: 1,
-            mapTop: 320, // 地图顶部位置
-            mapHeight: 800 - 320, // 地图高度
-            pinWidth: 10, // 标点宽度
-            pinHeight: 10, // 标点高度
-            selectedItem: {
-				// 自习区域
-				positions: [
-					{ x: 104, y: 255 },
-					{ x: 253, y: 142 },
-					{ x: 820, y: 153 },
-					{ x: 768, y: 462 },
-					{ x: 215, y: 680 },
-					{ x: 980, y: 711 },
-					{ x: 716, y: 948 },
-					{ x: 775, y: 1247 },
-				]
-			},
-            mapCorners: {
-                topLeft: { x: 0, y: 0 },
-                topRight: { x: 0, y: 0 },
-                bottomLeft: { x: 0, y: 0 },
-                bottomRight: { x: 0, y: 0 }
-            },
-			id: ''
+			id: '',
+			selectedFloorIndex: undefined,
+			surfaces: [],
+			imgHeight: 0
 		}
 	},
 	onLoad: function(option) {
@@ -71,77 +49,36 @@ export default {
 			method: 'POST',
 			data: {
 				"placeId": this.id,
-				"beacons": []
+				"beacons": ["00000000-0000-0000-0000-000000000000"]
 			},
 			success: (res) => {
-				console.log(res.data)
+				this.types = Array.from({ length:res.data.surfaces.length }, (_, index) => `${index + 1}F`)
+				this.selectedFloorIndex = 0
 				this.nearbys = res.data.places
+				this.surfaces = res.data.surfaces
 			},
 			fail(res) {
 				console.log(res)
 			}
 		});
 	},
-    mounted() {
-        this.getMapCorners();
-    },
 	methods: {
 		handleBack() {
 			uni.navigateBack(1)
 		},
-        onMapLoad(event) {
-			// const mapImage = event.target;
-			// // 打印mapImage的这四个值到控制台
-			// console.log(mapImage.naturalWidth, mapImage.naturalHeight, mapImage.width, mapImage.height);
-			// const mapWidth = mapImage.naturalWidth || mapImage.width;
-			// const mapHeight = mapImage.naturalHeight || mapImage.height;
-			// // const viewportWidth = window.innerWidth; // 获取视口宽度
-			// const systemInfo = uni.getSystemInfoSync();
-			// const viewportWidth = systemInfo.windowWidth; // 获取视口宽度
-			// const viewportHeight = systemInfo.windowHeight; // 获取视口高度
-   //          const rpxToPx = viewportWidth / 750; // 1rpx 等于多少 px
-   //          const containerHeightPx = this.mapHeight * rpxToPx; // mapHeight rpx 对应的 px 值
-			// console.log(`Map dimensions: naturalWidth=${mapWidth}, naturalHeight=${mapHeight}, viewportWidth=${viewportWidth}, viewportHeight=${viewportHeight}`);
-			// console.log(`rpxToPx=${rpxToPx}, containerHeightPx=${containerHeightPx}`);
-			// this.mapScale = viewportWidth / mapWidth;
-			// // this.mapScale = containerHeightPx / mapHeight;
-			// console.log(`mapScale=${this.mapScale}`);
-			// // 为了确保 mapContainer 已经被渲染，在 onMapLoad 方法中调用 getMapCorners 方法，因为此时图片已经加载完成，容器也应该已经渲染完毕。
-   //          this.getMapCorners();
-        },
-        handleItemClicked(item) {
-            // this.selectedItem = item;
-        },
-        getMapCorners() {
-    //         // this.$nextTick(() => {
-    //             const mapContainer = this.$refs.mapContainer;
-				// console.log(this.$refs)
-    //             if (mapContainer) {
-    //                 const rect = mapContainer.getBoundingClientRect();
-    //                 this.mapCorners = {
-    //                     topLeft: { x: rect.left, y: rect.top },
-    //                     topRight: { x: rect.right, y: rect.top },
-    //                     bottomLeft: { x: rect.left, y: rect.bottom },
-    //                     bottomRight: { x: rect.right, y: rect.bottom }
-    //                 };
-    //                 console.log('Map corners:', this.mapCorners);
-    //             } else {
-				// 	console.log('Map container not found');
-				// }
-    //         // });
-        },
-        getPinStyle(pos) {
-            // const { topLeft } = this.mapCorners;
-            // const left = topLeft.x + pos.x * this.mapScale - this.pinWidth / 2;
-            // const top = topLeft.y + pos.y * this.mapScale - this.pinHeight;
-            // return {
-            //     position: 'absolute',
-            //     left: `${left}px`,
-            //     top: `${top}px`,
-            //     width: `${this.pinWidth}px`,
-            //     height: `${this.pinHeight}px`
-            // };
-        }
+		handleFloorChange(tag) {
+			this.selectedFloorIndex = this.types.indexOf(tag)
+		},
+		barHeight() {
+			// 设置bar的style.top，使其在image的下方
+			// 将bar的top设置为image的高度加image的top
+			
+			const query = uni.createSelectorQuery().in(this);
+			query.select("#imageContain").boundingClientRect((data) => {
+				this.imgHeight = data.top + data.height + 50;
+			}).exec();
+
+		}
 	},
 }
 </script>
@@ -198,7 +135,5 @@ export default {
 	letter-spacing: 3px;
 	
 	color: #FCFCFC;
-	
-
 }
 </style>

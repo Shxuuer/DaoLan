@@ -27,6 +27,10 @@ const _sfc_main = {
       common_vendor.index.navigateTo({ url: `/pages/guide/inner?name=${name}&id=${id}` });
     },
     gotoInnerDetail(index) {
+      const tmp = this.nearby_position[index];
+      common_vendor.index.navigateTo({
+        url: `/pages/guide/innerDetail?name=${tmp.title}&Detail=${tmp.description}&imgUrl=${tmp.resource.coverImages}`
+      });
     },
     playSound(text) {
     }
@@ -42,22 +46,25 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       } : {}, {
         c: common_vendor.t(item.title),
         d: common_vendor.t(item.description),
-        e: !$props.isInner && item.hasSurfaces
+        e: !$props.isInner && item.hasSurfaces || $props.isInner || item.resource.audio != "" && item.resource.audio
+      }, !$props.isInner && item.hasSurfaces || $props.isInner || item.resource.audio != "" && item.resource.audio ? common_vendor.e({
+        f: !$props.isInner && item.hasSurfaces
       }, !$props.isInner && item.hasSurfaces ? {
-        f: common_vendor.o(($event) => $options.goToInner(item.title, item.id), index)
-      } : {}, $props.isInner ? {
-        g: common_vendor.o(($event) => $options.goToDetail(item.title, item.id, index), index)
+        g: common_vendor.o(($event) => $options.goToInner(item.title, item.id), index)
       } : {}, {
-        h: item.resource.audio != "" && item.resource.audio
+        h: $props.isInner
+      }, $props.isInner ? {
+        i: common_vendor.o(($event) => $options.goToDetail(item.title, item.id, index), index)
+      } : {}, {
+        j: item.resource.audio != "" && item.resource.audio
       }, item.resource.audio != "" && item.resource.audio ? {
-        i: common_assets._imports_0$2,
-        j: common_vendor.o(($event) => $options.playSound(item.description), index)
-      } : {}, {
-        k: common_vendor.o(($event) => $options.goToDetail(item.title, item.id, index), index),
-        l: index
+        k: common_assets._imports_0$2,
+        l: common_vendor.o(($event) => $options.playSound(item.description), index)
+      } : {}) : {}, {
+        m: common_vendor.o(($event) => $options.goToDetail(item.title, item.id, index), index),
+        n: index
       });
-    }),
-    b: $props.isInner
+    })
   };
 }
 const Component = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-35e19124"]]);

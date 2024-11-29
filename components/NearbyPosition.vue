@@ -9,7 +9,7 @@
 					<view class="name">{{item.title}}</view>
 					<view class="detail">{{item.description}}</view>
 				</view>
-				<view class="btns">
+				<view class="btns" v-if="(!isInner && item.hasSurfaces) || (isInner) || (item.resource.audio!='' && item.resource.audio)">
 					<view class="inner-btn" @click.stop="goToInner(item.title, item.id)" v-if="!isInner && item.hasSurfaces">
 						<text style="width: 100%;text-align: center;">室内</text>
 					</view>
@@ -52,10 +52,10 @@ export default {
 			uni.navigateTo({ url: `/pages/guide/inner?name=${name}&id=${id}` })
 		},
 		gotoInnerDetail(index) {
-			// const tmp = this.nearby_position[index]
-			// uni.navigateTo({
-			// 	url: `/pages/guide/innerDetail?name=${tmp.Title}&Detail=${tmp.Description}&imgUrl=${tmp.Resource.CoverImages[1]}`
-			// })
+			const tmp = this.nearby_position[index]
+			uni.navigateTo({
+				url: `/pages/guide/innerDetail?name=${tmp.title}&Detail=${tmp.description}&imgUrl=${tmp.resource.coverImages}`
+			})
 		},
 		playSound(text) {
 		}

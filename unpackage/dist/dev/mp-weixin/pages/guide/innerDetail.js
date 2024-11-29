@@ -1,4 +1,5 @@
 "use strict";
+const static_const = require("../../static/const.js");
 const common_vendor = require("../../common/vendor.js");
 const TopBar = () => "../../components/TopBar.js";
 const _sfc_main = {
@@ -10,10 +11,12 @@ const _sfc_main = {
         name: "",
         Detail: "",
         imgUrl: ""
-      }
+      },
+      _const: static_const._const
     };
   },
   onLoad: function(option) {
+    this.pageInfo = { ...option };
   }
 };
 if (!Array) {
@@ -25,7 +28,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     a: common_vendor.p({
       name: $data.pageInfo.name
     }),
-    b: $data.pageInfo.imgUrl,
+    b: $data._const.imgURL + $data.pageInfo.imgUrl,
     c: common_vendor.t($data.pageInfo.Detail)
   };
 }
