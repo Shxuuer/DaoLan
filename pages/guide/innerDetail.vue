@@ -16,7 +16,7 @@
 
 <script>
 import TopBar from '../../components/TopBar.vue'
-import _const from '../../static/const'
+import {_const} from '../../static/const'
 
 export default {
 	name: 'inner',

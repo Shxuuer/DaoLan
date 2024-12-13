@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import _const from '../static/const';
+import {_const} from '../static/const';
 export default {
 	name:"NearbyPosition",
 	props: ['nearby_position', 'isInner'],

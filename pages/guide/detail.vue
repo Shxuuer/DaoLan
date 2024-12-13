@@ -34,7 +34,7 @@
 import TopBar from '../../components/TopBar.vue'
 import NearbyPosition from '../../components/NearbyPosition.vue'
 import MyMap from '../../components/MyMap.vue'
-import _const from '../../static/const'
+import {_const} from '../../static/const'
 
 export default {
 	name: 'detail',

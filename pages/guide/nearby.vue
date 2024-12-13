@@ -21,7 +21,7 @@ import TopBar from '../../components/TopBar.vue'
 import NearbyPosition from '../../components/NearbyPosition.vue'
 import SelectGroup from '../../components/SelectGroup.vue'
 import MyMap from '../../components/MyMap.vue'
-import _const from '../../static/const'
+import {_const} from '../../static/const'
 
 export default {
 	components: {TopBar, NearbyPosition, SelectGroup, MyMap},

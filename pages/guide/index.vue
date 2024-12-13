@@ -1,6 +1,6 @@
 <script>
 import BottomBar from '../../components/BottomBar.vue'
-import _const from '../../static/const'
+import {_const} from '../../static/const'
 
 export default {
 	data() {
